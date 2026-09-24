@@ -41,7 +41,7 @@ const TOKEN_HEADER: &str = "x-companion-token";
 /// domain(s) in production; defaults cover local development only.
 fn allowed_origins() -> Vec<HeaderValue> {
     let raw = std::env::var("COMPANION_ALLOWED_ORIGINS")
-        .unwrap_or_else(|_| "http://localhost:3000,http://127.0.0.1:3000,http://192.168.1.34:3000".to_string());
+        .unwrap_or_else(|_| "http://localhost:3000,http://127.0.0.1:3000,https://streamflow-smoky.vercel.app".to_string());
     raw.split(',')
         .map(str::trim)
         .filter(|s| !s.is_empty())
