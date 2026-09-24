@@ -4,6 +4,7 @@ I kept opening random movie sites and wondering the same thing: *how does this p
 
 So I started pulling those pieces apart. Small scripts at first. Then enough of them that I wanted a real shape around it: catalog on one side, pluggable extractors on the other, and a local process that could run the messy parts without me pasting URLs into curl forever.
 
+![Streamflow run flow: browse the catalog, resolve streams, and play one](./screenshots/runflow.gif)
 
 > **Caution / what this project is not**
 >
