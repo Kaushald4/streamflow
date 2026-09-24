@@ -1,0 +1,18 @@
+[package]
+name = "js-host"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+extractor-core = { path = "../core" }
+wasm-host = { path = "../wasm-host" }
+rquickjs = { version = "0.12", features = ["full"] }
+reqwest = { version = "0.12", features = ["blocking", "json"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.23"
+anyhow = "1"
+regex = "1"
+rand = "0.8"
+sha2 = "0.10"
+aes-gcm = "0.10"

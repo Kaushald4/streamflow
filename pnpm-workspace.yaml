@@ -1,6 +1,9 @@
 packages: []
 
 allowBuilds:
-  sharp: true
-  unrs-resolver: true
-  msw: false
+  sharp: false
+  unrs-resolver: false
+  # stream-resolver's `prepare` compiles dist/ during install; dist is not
+  # committed, so without this the install fails with
+  # ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED.
+  stream-resolver: true
