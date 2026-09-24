@@ -2,7 +2,7 @@
 //! entirely on the user's machine (this binary), not the hosted server.
 //!
 //! This deliberately doesn't replicate the web pipeline's full
-//! resolver/registry/dedupe/rank machinery (`extractor/src/core/pipeline.ts`)
+//! resolver/registry/dedupe/rank machinery (`stream-resolver/src/core/pipeline.ts`)
 //! It tries every installed adapter that claims to support the requested
 //! kind, aggregates whatever streams and errors come back, and returns that.
 //! Good enough for what the UI needs (a list of playable streams); ranking

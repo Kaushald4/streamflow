@@ -1,5 +1,5 @@
 //! Native Viduki WASM bridge, stateful pepper + envelope decryption.
-//! Mirrors `extractor/src/primitives/viduki-wasm.ts` (QuickJS has no WebAssembly).
+//! Mirrors `stream-resolver/src/primitives/viduki-wasm.ts` (QuickJS has no WebAssembly).
 
 use anyhow::{Context, Result};
 use wasmtime::{Engine, Instance, Linker, Module, Store, Val};

@@ -36,23 +36,26 @@ Most "stream aggregator" demos hardcode one site and fall over the week the site
 2. Normalize it into something a player can eat
 3. Keep site-specific crypto/WASM/referer quirks out of the UI
 
-Adapters live in their own pack (`extractor/`). The companion loads them in QuickJS, with a few native hooks when pure JS isn't enough (AES-GCM, ALTCHA, WASM hosts, the stuff that kept breaking when I tried to fake it in a browser sandbox).
+Adapters live in a separate repo ([stream-resolver](https://github.com/Kaushald4/stream-resolver)). The companion loads them in QuickJS, with a few native hooks when pure JS isn't enough (AES-GCM, ALTCHA, WASM hosts, the stuff that kept breaking when I tried to fake it in a browser sandbox).
 
 Playback goes through opaque session URLs on the companion so the player never has to know which CDN you're talking to, just that it needs a same-origin proxy that can attach `Referer` / `Origin` correctly, including the annoying cross-CDN segment cases.
 
 ## Layout
 
 ```
-streamflow/          # this repo, UI + companion
+streamflow/
   app/               # Next.js pages (browse, detail, watch)
-  companion/         # Rust local server
+  companion/         # Rust local server: runs adapters, proxies streams
   lib/               # TMDB client, companion API helpers, stream sessions
-
-extractor/           # sibling package, adapter source + pack scripts
-  src/extractors/    # one folder per source
 ```
 
-If you're only cloning this folder, you'll need the extractor package next to it (or point `package.json` at wherever you keep adapters).
+Adapters are not in this repo. They live in a separate one, [stream-resolver](https://github.com/Kaushald4/stream-resolver), which this app depends on directly:
+
+```json
+"stream-resolver": "github:Kaushald4/stream-resolver#main"
+```
+
+So `pnpm install` fetches it from GitHub and nothing needs to sit beside this checkout. `dist/` is not committed there, so that package's `prepare` script compiles it during install, which is why `stream-resolver: true` appears under `allowBuilds` in `pnpm-workspace.yaml`.
 
 ## Running it locally
 
@@ -70,7 +73,7 @@ cd streamflow/companion
 cargo run -p companion # http://127.0.0.1:4310
 ```
 
-Pairing is automatic from the UI once the companion is up. Adapters are zip packages, pack them from the extractor repo (`pnpm pack-adapter <name>`) and upload them on the Plugins page.
+Pairing is automatic from the UI once the companion is up. Adapters are zip packages: packed builds of the ones in `stream-resolver` are attached to its `adapters-v*` releases, and you can build your own there with `pnpm pack-adapter <name>`. Upload the zip on the Plugins page.
 
 ## What's intentionally not here
 

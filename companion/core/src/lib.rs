@@ -1,4 +1,4 @@
-//! Types mirroring `extractor/src/core/types.ts` in the sibling TS package
+//! Types mirroring `stream-resolver/src/core/types.ts` in the adapter package
 //! (used by the web build). This crate does not depend on, import, or
 //! modify that package, it is an independent reimplementation for the
 //! companion's extraction path. Field shapes are kept identical to the TS
@@ -177,7 +177,7 @@ pub struct ExtractionResult {
     pub duration_ms: u64,
 }
 
-/// Mirrors `ExternalAdapterManifest` from `extractor/src/adapters/manifest.ts`
+/// Mirrors `ExternalAdapterManifest` from `stream-resolver/src/adapters/manifest.ts`
 /// field-for-field. The companion's adapter packages are the *same* JS+manifest zip
 /// format web uses (see `js-host`), the only native piece is the shared
 /// `primitives/wasm-decrypt` primitive, resolved at runtime, not a

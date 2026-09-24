@@ -1,13 +1,15 @@
 name: Release Streamflow Companion
 
-# Builds the local companion binary (companion/cli) for macOS/Windows/Linux.
+# Builds the local companion binary (companion/cli) for macOS/Windows/Linux
+# and publishes it to a GitHub Release.
 #
-# Every push to main runs the matrix as a build check. Pushing a tag like
-# `companion-v0.1.0` additionally publishes a GitHub Release, and a manual run
-# (workflow_dispatch) just verifies the builds.
+# Tag-driven on purpose. The matrix builds four operating systems, and on a
+# branch push its only output would be an artifact nothing consumes, because
+# the release job is tag-gated. Pushing a tag like `companion-v0.1.0` builds
+# and publishes; a manual run (workflow_dispatch) verifies the builds without
+# releasing, and costs nothing the rest of the time.
 on:
   push:
-    branches: [main]
     tags:
       - "companion-v*"
   workflow_dispatch: {}

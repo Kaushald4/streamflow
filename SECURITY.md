@@ -99,7 +99,7 @@ Straight from how the code behaves:
 - **Installed adapter JS is semi-trusted.** Once it loads, it gets SSRF-filtered access to the public internet. That is the point of adapters, not an accident. Auth does not make the adapter’s logic “safe”, you are choosing to trust the zip, same idea as a browser extension or an npm package.
 - **Adapter zips are not signed.** Upload accepts whatever `js_host::load_package` accepts (manifest parse, UTF-8 entry, bundle validation / web-only reject). There is no publisher signature check in the companion.
 - **This repo does not code-sign the companion binary.** Trust is whatever you built or downloaded, same as any other local tool you compile yourself.
-- **Packed adapters are obfuscated** (`extractor/scripts/pack-adapter.mjs` via `javascript-obfuscator`). That makes casual eyeballing of installed `index.js` hard, for you and for the companion.
+- **Packed adapters are obfuscated** (`stream-resolver/scripts/pack-adapter.mjs` via `javascript-obfuscator`). That makes casual eyeballing of installed `index.js` hard, for you and for the companion.
 - **Same-user local processes** can read `~/.streamflow/token` (or `$STREAMFLOW_DATA_DIR/token`) and impersonate a paired client. Same class of problem as reading `localStorage`.
 
 ## Why these layers look the way they do
